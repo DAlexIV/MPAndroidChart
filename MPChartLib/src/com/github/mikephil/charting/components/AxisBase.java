@@ -36,6 +36,11 @@ public abstract class AxisBase extends ComponentBase {
     protected boolean mDrawAxisLine = true;
 
     /**
+     * flag that indicates if we need to draw background
+     */
+    protected boolean mDrawMeshBackground = true;
+
+    /**
      * flag that indicates of the labels of this axis should be drawn or not
      */
     protected boolean mDrawLabels = true;
@@ -219,6 +224,15 @@ public abstract class AxisBase extends ComponentBase {
      */
     public boolean isDrawLabelsEnabled() {
         return mDrawLabels;
+    }
+
+
+    public boolean isDrawMeshBackground() {
+        return mDrawMeshBackground;
+    }
+
+    public void setDrawMeshBackground(boolean mDrawMeshBackground) {
+        this.mDrawMeshBackground = mDrawMeshBackground;
     }
 
     /**

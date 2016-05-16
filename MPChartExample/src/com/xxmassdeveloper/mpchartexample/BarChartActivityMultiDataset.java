@@ -36,7 +36,7 @@ public class BarChartActivityMultiDataset extends DemoBase implements OnSeekBarC
     private BarChart mChart;
     private SeekBar mSeekBarX, mSeekBarY;
     private TextView tvX, tvY;
-    
+
     private Typeface tf;
 
     @Override
@@ -60,13 +60,19 @@ public class BarChartActivityMultiDataset extends DemoBase implements OnSeekBarC
         mChart.setDescription("");
 
 //        mChart.setDrawBorders(true);
-        
+
         // scaling can now only be done on x- and y-axis separately
         mChart.setPinchZoom(false);
 
         mChart.setDrawBarShadow(false);
 
         mChart.setDrawGridBackground(false);
+
+//        mChart.setDrawBarShadow(true);
+
+
+//        mChart.setDrawGridBackground(true);
+
 
         // create a custom MarkerView (extend MarkerView) and specify the layout
         // to use for it
@@ -93,6 +99,8 @@ public class BarChartActivityMultiDataset extends DemoBase implements OnSeekBarC
 
         XAxis xl = mChart.getXAxis();
         xl.setTypeface(tf);
+        xl.setDrawGridLines(false);
+        xl.setDrawMeshBackground(true);
 
         YAxis leftAxis = mChart.getAxisLeft();
         leftAxis.setTypeface(tf);
@@ -137,13 +145,13 @@ public class BarChartActivityMultiDataset extends DemoBase implements OnSeekBarC
             }
             case R.id.actionToggleBarBorders: {
                 for (IBarDataSet set : mChart.getData().getDataSets())
-                    ((BarDataSet)set).setBarBorderWidth(set.getBarBorderWidth() == 1.f ? 0.f : 1.f);
+                    ((BarDataSet) set).setBarBorderWidth(set.getBarBorderWidth() == 1.f ? 0.f : 1.f);
 
                 mChart.invalidate();
                 break;
             }
             case R.id.actionToggleHighlight: {
-                if(mChart.getData() != null) {
+                if (mChart.getData() != null) {
                     mChart.getData().setHighlightEnabled(!mChart.getData().isHighlightEnabled());
                     mChart.invalidate();
                 }
@@ -187,7 +195,7 @@ public class BarChartActivityMultiDataset extends DemoBase implements OnSeekBarC
 
         ArrayList<String> xVals = new ArrayList<String>();
         for (int i = 0; i < mSeekBarX.getProgress(); i++) {
-            xVals.add((i+1990) + "");
+            xVals.add((i + 1990) + "");
         }
 
         ArrayList<BarEntry> yVals1 = new ArrayList<BarEntry>();
@@ -215,9 +223,9 @@ public class BarChartActivityMultiDataset extends DemoBase implements OnSeekBarC
 
         if (mChart.getData() != null &&
                 mChart.getData().getDataSetCount() > 0) {
-            set1 = (BarDataSet)mChart.getData().getDataSetByIndex(0);
-            set2 = (BarDataSet)mChart.getData().getDataSetByIndex(1);
-            set3 = (BarDataSet)mChart.getData().getDataSetByIndex(2);
+            set1 = (BarDataSet) mChart.getData().getDataSetByIndex(0);
+            set2 = (BarDataSet) mChart.getData().getDataSetByIndex(1);
+            set3 = (BarDataSet) mChart.getData().getDataSetByIndex(2);
             set1.setYVals(yVals1);
             set2.setYVals(yVals2);
             set3.setYVals(yVals3);

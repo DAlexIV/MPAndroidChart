@@ -172,6 +172,7 @@ public class CombinedChart extends BarLineChartBase<CombinedData> implements Lin
         return mDrawHighlightArrow;
     }
 
+
     /**
      * set this to true to draw the highlightning arrow
      *

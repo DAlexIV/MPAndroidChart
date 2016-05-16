@@ -35,6 +35,7 @@ public class BarChart extends BarLineChartBase<BarData> implements BarDataProvid
 	 */
 	private boolean mDrawBarShadow = false;
 
+
 	public BarChart(Context context) {
 		super(context);
 	}
@@ -143,7 +144,7 @@ public class BarChart extends BarLineChartBase<BarData> implements BarDataProvid
 		return mDrawHighlightArrow;
 	}
 
-	/**
+    /**
 	 * If set to true, all values are drawn above their bars, instead of below their top.
 	 * 
 	 * @param enabled

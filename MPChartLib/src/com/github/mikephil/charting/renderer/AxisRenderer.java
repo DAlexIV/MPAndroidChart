@@ -30,6 +30,9 @@ public abstract class AxisRenderer extends Renderer {
 	/** paint used for the limit lines */
 	protected Paint mLimitLinePaint;
 
+    /** paint used for the limit lines */
+    protected Paint mMeshBackgroundPaint;
+
 	public AxisRenderer(ViewPortHandler viewPortHandler, Transformer trans) {
         super(viewPortHandler);
 
@@ -42,6 +45,9 @@ public abstract class AxisRenderer extends Renderer {
         mGridPaint.setStrokeWidth(1f);
         mGridPaint.setStyle(Style.STROKE);
         mGridPaint.setAlpha(90);
+
+        mMeshBackgroundPaint = new Paint();
+        mMeshBackgroundPaint.setColor(Color.GRAY);
 
         mAxisLinePaint = new Paint();
         mAxisLinePaint.setColor(Color.BLACK);

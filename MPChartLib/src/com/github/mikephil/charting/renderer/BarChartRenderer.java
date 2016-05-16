@@ -25,7 +25,9 @@ public class BarChartRenderer extends DataRenderer {
 
     protected BarDataProvider mChart;
 
-    /** the rect object that is used for drawing the bars */
+    /**
+     * the rect object that is used for drawing the bars
+     */
     protected RectF mBarRect = new RectF();
 
     protected BarBuffer[] mBarBuffers;
@@ -34,7 +36,7 @@ public class BarChartRenderer extends DataRenderer {
     protected Paint mBarBorderPaint;
 
     public BarChartRenderer(BarDataProvider chart, ChartAnimator animator,
-            ViewPortHandler viewPortHandler) {
+                            ViewPortHandler viewPortHandler) {
         super(animator, viewPortHandler);
         this.mChart = chart;
 
@@ -121,6 +123,7 @@ public class BarChartRenderer extends DataRenderer {
             }
         }
 
+
         // if multiple colors
         if (dataSet.getColors().size() > 1) {
 
@@ -168,15 +171,15 @@ public class BarChartRenderer extends DataRenderer {
 
     /**
      * Prepares a bar for being highlighted.
-     * 
-     * @param x the x-position
-     * @param y1 the y1-position
-     * @param y2 the y2-position
+     *
+     * @param x            the x-position
+     * @param y1           the y1-position
+     * @param y2           the y2-position
      * @param barspaceHalf the space between bars
      * @param trans
      */
     protected void prepareBarHighlight(float x, float y1, float y2, float barspaceHalf,
-            Transformer trans) {
+                                       Transformer trans) {
 
         float barWidth = 0.5f;
 
@@ -339,8 +342,8 @@ public class BarChartRenderer extends DataRenderer {
             if (maxDataSetIndex - minDataSetIndex < 1) continue;
 
             for (int dataSetIndex = minDataSetIndex;
-                    dataSetIndex < maxDataSetIndex;
-                    dataSetIndex++) {
+                 dataSetIndex < maxDataSetIndex;
+                 dataSetIndex++) {
 
                 IBarDataSet set = barData.getDataSetByIndex(dataSetIndex);
 
@@ -418,7 +421,7 @@ public class BarChartRenderer extends DataRenderer {
     }
 
     public float[] getTransformedValues(Transformer trans, IBarDataSet data,
-            int dataSetIndex) {
+                                        int dataSetIndex) {
         return trans.generateTransformedValuesBarChart(data, dataSetIndex,
                 mChart.getBarData(),
                 mAnimator.getPhaseY());
@@ -430,5 +433,8 @@ public class BarChartRenderer extends DataRenderer {
     }
 
     @Override
-    public void drawExtras(Canvas c) { }
+    public void drawExtras(Canvas c) {
+
+    }
+
 }

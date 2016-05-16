@@ -16,7 +16,7 @@ public class XAxisRendererBarChart extends XAxisRenderer {
     protected BarChart mChart;
 
     public XAxisRendererBarChart(ViewPortHandler viewPortHandler, XAxis xAxis, Transformer trans,
-            BarChart chart) {
+                                 BarChart chart) {
         super(viewPortHandler, xAxis, trans);
 
         this.mChart = chart;
@@ -24,7 +24,7 @@ public class XAxisRendererBarChart extends XAxisRenderer {
 
     /**
      * draws the x-labels on the specified y-position
-     * 
+     *
      * @param pos
      */
     @Override
@@ -33,7 +33,7 @@ public class XAxisRendererBarChart extends XAxisRenderer {
         final float labelRotationAngleDegrees = mXAxis.getLabelRotationAngle();
 
         // pre allocate to save performance (dont allocate in loop)
-        float[] position = new float[] {
+        float[] position = new float[]{
                 0f, 0f
         };
 
@@ -84,10 +84,10 @@ public class XAxisRendererBarChart extends XAxisRenderer {
     @Override
     public void renderGridLines(Canvas c) {
 
-        if (!mXAxis.isDrawGridLinesEnabled() || !mXAxis.isEnabled())
+        if (!mXAxis.isEnabled())
             return;
 
-        float[] position = new float[] {
+        float[] position = new float[]{
                 0f, 0f
         };
 
@@ -97,17 +97,35 @@ public class XAxisRendererBarChart extends XAxisRenderer {
         BarData bd = mChart.getData();
         int step = bd.getDataSetCount();
 
-        for (int i = mMinX; i < mMaxX; i += mXAxis.mAxisLabelModulus) {
+        int k = 0;
+        float prev = -10;
+        for (int i = mMinX; i < mMaxX; i += mXAxis.mAxisLabelModulus, ++k) {
 
             position[0] = i * step + i * bd.getGroupSpace() - 0.5f;
 
             mTrans.pointValuesToPixel(position);
 
-            if (mViewPortHandler.isInBoundsX(position[0])) {
-
-                c.drawLine(position[0], mViewPortHandler.offsetTop(), position[0],
-                        mViewPortHandler.contentBottom(), mGridPaint);
+            if (mXAxis.isDrawGridLinesEnabled()) {
+                if (mViewPortHandler.isInBoundsX(position[0])) {
+                    c.drawLine(position[0], mViewPortHandler.offsetTop(), position[0],
+                            mViewPortHandler.contentBottom(), mGridPaint);
+                }
             }
+
+            if (mXAxis.isDrawMeshBackground()) {
+                if (mViewPortHandler.isInBoundsX(position[0])
+                        && mViewPortHandler.isInBoundsX(prev)) {
+
+                    if (k % 2 == 0) {
+
+                        c.drawRect(prev, mViewPortHandler.offsetTop(),
+                                position[0], mViewPortHandler.contentBottom(), mMeshBackgroundPaint);
+                    }
+                }
+            }
+
+            prev = position[0];
         }
+
     }
 }
